@@ -1,1 +1,1 @@
-../../asm-yaepl/editor/mode.js
+../../asm-yaepl/editor/content/scripts/mode.js
