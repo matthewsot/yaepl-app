@@ -1,0 +1,15 @@
+{
+  "name": "yaepl-app",
+  "version": "1.0.0",
+  "description": "YAEPL/JS app for Develop '17.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/matthewsot/yaepl-app",
+  "author": "Matthew Sotoudeh/Develop Academy",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "~1.6.2"
+  }
+}
