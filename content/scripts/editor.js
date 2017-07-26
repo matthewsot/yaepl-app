@@ -45,31 +45,31 @@ function runYAEPL() {
     }
     interpretLine(0);
 };
+
+const vm = require('vm');
 function runJS() {
     term.clear();
 
-    var lines = editor.getValue().split('\n');
+    var scriptStr = editor.getValue();
+    scriptStr = wrapAwait(scriptStr);
+    alert(scriptStr);
     
-    var yaepl = new Yaepl({
-        outHandle: function (str) { window.term.print(str); },
-        promptHandle: function (str, callback) {
-            window.term.input(str, function (ret) {
-                callback(ret);
+    const script = new vm.Script(scriptStr);
+    var sandbox = {
+        'alert': window.alert,
+        'write': function (a) { term.print(a); },
+        'prompt': async function (a) {
+            var promptPromise = new Promise(function (resolve, reject) {
+                window.term.input(a, function (ret) {
+                    resolve(ret);
+                });
             });
+            return await promptPromise;
         }
-    });
+    };
+    const context = new vm.createContext(sandbox);
 
-    var l = 0;
-    var maxL = lines.length;
-    function interpretLine(l) {
-        yaepl.interpretLine(lines[l], function () {
-            l++;
-            if (l < maxL) {
-                interpretLine(l);
-            }
-        });
-    }
-    interpretLine(0);
+    script.runInContext(context);
 };
 function run() {
     switch (window.lang) {
