@@ -1,13 +1,16 @@
 let esprima = require("esprima");
 let escodegen = require("escodegen");
+
 function wrapSingle(el) {
     if (el === undefined) return undefined;
 
-    el.argument = wrapSingle(el.argument);
-    el.arguments = wrapList(el.arguments);
+    el.argument = wrap(el.argument);
+    el.init = wrap(el.init);
+    el.arguments = wrap(el.arguments);
+    el.declarations = wrap(el.declarations);
 
-    el.left = wrapSingle(el.left);
-    el.right = wrapSingle(el.right);
+    el.left = wrap(el.left);
+    el.right = wrap(el.right);
 
     if (el.type == "CallExpression") {
         el = {
@@ -16,23 +19,27 @@ function wrapSingle(el) {
         };
     }
 
-    el.expression = wrapSingle(el.expression);
-    el.body = wrapList(el.body);
+    el.expression = wrap(el.expression);
+    el.body = wrap(el.body);
     return el;
 }
 function wrapList(list) {
     if (list === undefined) return undefined;
 
     if (list.body !== undefined) {
-        list.body = wrapList(list.body);
+        list.body = wrap(list.body);
         return list;
     }
 
     var newList = []
     for (var i = 0; i < list.length; i++) {
-        list[i] = wrapSingle(list[i]);
+        list[i] = wrap(list[i]);
     }
     return list;
+}
+function wrap(el) {
+    if (Array.isArray(el)) return wrapList(el);
+    return wrapSingle(el);
 }
 
 function wrapAwait(script) {
@@ -43,13 +50,13 @@ function wrapAwait(script) {
     for (var i = 0; i < parsed.length; i++) {
         if (parsed[i].type == "FunctionDeclaration") {
             parsed[i].async = true;
-            parsed[i].body = wrapList(parsed[i].body);
+            parsed[i].body = wrap(parsed[i].body);
             functions.push(parsed[i]);
         } else {
             body.push(parsed[i]);
         }
     }
-    body = wrapList(body);
+    body = wrap(body);
 
     var pre = escodegen.generate({ type: "Program", body: functions });
     var internal = escodegen.generate({ type: "Program", body: body });

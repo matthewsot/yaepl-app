@@ -52,7 +52,6 @@ function runJS() {
 
     var scriptStr = editor.getValue();
     scriptStr = wrapAwait(scriptStr);
-    alert(scriptStr);
     
     const script = new vm.Script(scriptStr);
     var sandbox = {
