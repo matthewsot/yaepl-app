@@ -1,3 +1,17 @@
+/*
+ * Because our custom prompt uses a callback/promise,
+ * we need to modify the code to ensure that it works
+ * as the student expects.
+ *
+ * The wrapAwait function returns a new script that 
+ * marks all global functions async, then awaits all
+ * function calls.
+ *
+ * NOTE - this has serious issues for more complex
+ * Javascript, so using this for anything beyond
+ * introductory code is not supported or tested.
+ */
+
 let esprima = require("esprima");
 let escodegen = require("escodegen");
 
