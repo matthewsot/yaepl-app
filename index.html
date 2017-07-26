@@ -8,10 +8,15 @@
 <body>
     <nav>
         <ul>
-            <li>YAEPL</li>
-            <li>Javascript</li>
+            <li lang="yaepl">
+                YAEPL Editor
+            </li>
+            <li lang="javascript">
+                Javascript Editor
+            </li>
         </ul>
     </nav>
-    <webview src="editor.html" nodeintegration disablewebsecurity></webview>
+    <webview src="editor.html#yaepl" id="view" nodeintegration disablewebsecurity></webview>
+    <script type="text/javascript" src="content/scripts/frame.js"></script>
 </body>
 </html>
