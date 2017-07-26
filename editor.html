@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YAEPL Editor</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="content/styles/codemirror.css"/>
+    <link rel="stylesheet" href="content/styles/editor.css" />
+</head>
+<body>
+    <h1>Code Editor</h1>
+    <main>
+        <textarea id="editor"></textarea>
+        <div id="terminal"></div>
+    </main>
+
+    <button id="run">Run Code (Ctrl+Space)</button>
+    <button id="open">Open File</button>
+    <button id="save">Save As...</button>
+    <!-- <button id="step">Step Through Code</button> -->
+
+    <script src="content/scripts/codemirror.min.js"></script>
+    <script src="content/scripts/yaepl-mode.js"></script>
+    <script src="content/scripts/yaepl.js"></script>
+    <script src="content/scripts/terminal.js"></script>
+    <script src="content/scripts/editor.js"></script>
+    <script src="content/scripts/open-save.js"></script>
+</body>
+</html>
