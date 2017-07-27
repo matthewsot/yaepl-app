@@ -1,4 +1,5 @@
-window.lang = window.location.hash.split('#')[1];
+window.lang = window.location.hash.split('#')[1].split(',')[0];
+window.proj = window.location.hash.split('#')[1].split(',')[1];
 
 var langDict = { "yaepl": "YAEPL", "javascript": "Javascript" };
 document.getElementById("lang").textContent = langDict[window.lang];
@@ -46,6 +47,18 @@ function runYAEPL() {
     interpretLine(0);
 };
 
+window.sandbox = {
+    'alert': window.alert,
+    'write': function (a) { term.print(a); },
+    'prompt': async function (a) {
+        var promptPromise = new Promise(function (resolve, reject) {
+            window.term.input(a, function (ret) {
+                resolve(ret);
+            });
+        });
+        return await promptPromise;
+    }
+};
 const vm = require('vm');
 function runJS() {
     term.clear();
@@ -54,23 +67,13 @@ function runJS() {
     scriptStr = wrapAwait(scriptStr);
     
     const script = new vm.Script(scriptStr);
-    var sandbox = {
-        'alert': window.alert,
-        'write': function (a) { term.print(a); },
-        'prompt': async function (a) {
-            var promptPromise = new Promise(function (resolve, reject) {
-                window.term.input(a, function (ret) {
-                    resolve(ret);
-                });
-            });
-            return await promptPromise;
-        }
-    };
-    const context = new vm.createContext(sandbox);
+    const context = new vm.createContext(window.sandbox);
 
     script.runInContext(context);
 };
+window.preRun = function () { };
 function run() {
+    window.preRun();
     switch (window.lang) {
         case "yaepl":
             runYAEPL();
@@ -90,3 +93,8 @@ editor.setOption("extraKeys", {
         window.save();
     }
 });
+
+if (proj.length > 0) {
+    document.writeln("<link rel=\"stylesheet\" href=\"content/styles/projects/" + proj + ".css\" />");
+    document.writeln("<script src=\"content/scripts/projects/" + proj + ".js\"></script>");
+}

@@ -4,16 +4,25 @@
   "description": "YAEPL/JS app for Develop '17.",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "repository": "https://github.com/matthewsot/yaepl-app",
   "author": "Matthew Sotoudeh/Develop Academy",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "~1.6.2"
+    "electron": "~1.6.2",
+    "electron-builder": "^19.6.3"
   },
   "dependencies": {
     "escodegen": "^1.8.1",
     "esprima": "^4.0.0"
+  },
+  "build": {
+    "appId": "your.id",
+    "mac": {
+      "category": "your.app.category.type"
+    }
   }
 }

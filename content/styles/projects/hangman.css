@@ -1,0 +1,14 @@
+#hangman-letters {
+    list-style-type: none;
+}
+    #hangman-letters li {
+        display: inline-block;
+        border: 1px solid black;
+        height: 35px;
+        width: 30px;
+        font-size: 30px;
+        vertical-align: middle;
+    }
+    #hangman-letters li + li {
+        margin-left: 5px;
+    }
