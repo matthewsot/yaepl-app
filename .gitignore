@@ -1,6 +1,7 @@
 *.swp
 *.swo
 *.lock
+dist/**
 
 # Logs
 logs

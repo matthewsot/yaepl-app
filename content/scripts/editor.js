@@ -8,6 +8,7 @@ var editorArea = document.getElementById("editor");
 var editor = CodeMirror.fromTextArea(editorArea, {
     lineNumbers: true,
     autofocus: true,
+    indentUnit: 4,
     mode: window.lang,
 });
 

@@ -39,5 +39,6 @@ main {
     background-color: black;
     text-align: left;
     overflow: hidden;
-    height: calc(100vh - 150px);
+    overflow-y: auto;
+    min-height: calc(100vh - 150px);
 }

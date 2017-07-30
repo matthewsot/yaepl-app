@@ -6,7 +6,9 @@
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "distl": "electron-builder -l",
+    "distm": "electron-builder -m",
+    "distw": "electron-builder -w"
   },
   "repository": "https://github.com/matthewsot/yaepl-app",
   "author": "Matthew Sotoudeh/Develop Academy",
