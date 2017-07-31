@@ -92,7 +92,28 @@ editor.setOption("extraKeys", {
     },
     "Ctrl-S": function (cm) {
         window.save();
-    }
+    },
+    "Cmd-S": function (cm) {
+        window.save();
+    },
+    "Ctrl-Shift-S": function (cm) {
+        window.save();
+    },
+    "Cmd-Shift-S": function (cm) {
+        window.save();
+    },
+    "Ctrl-O": function (cm) {
+        window.open();
+    },
+    "Cmd-O": function (cm) {
+        window.open();
+    },
+    "Ctrl-N": function (cm) {
+        window.newFile();
+    },
+    "Cmd-N": function (cm) {
+        window.newFile();
+    },
 });
 
 if (proj.length > 0) {

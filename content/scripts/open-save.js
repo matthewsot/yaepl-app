@@ -7,7 +7,7 @@ window.fileName = null;
 var extension = { "javascript": "js", "yaepl": "yaepl" }[window.lang];
 var filter = { name: window.lang + " files", extensions: [extension] };
 
-document.getElementById("open").onclick = function () {
+window.open = function () {
     dialog.showOpenDialog({ filters: [ filter] },
         function (fileNames) {
             if (fileNames === undefined) return;
@@ -18,9 +18,28 @@ document.getElementById("open").onclick = function () {
         });
 };
 
+document.getElementById("open").onclick = window.open;
+
+window.newFile = function () {
+    editor.setValue("");
+    term.clear();
+    window.fileName = fileName;
+};
+
+window.saveAs = function () {
+    dialog.showSaveDialog({ filters: [ filter ] },
+        function (fileName) {
+            if (fileName === undefined) return;
+            window.fileName = fileName;
+            window.save();
+        });
+};
+
 window.save = function () {
     if (window.fileName !== null) {
         fs.writeFile(window.fileName, editor.getValue(), function (err) {});
+    } else {
+        window.saveAs();
     }
 };
 
