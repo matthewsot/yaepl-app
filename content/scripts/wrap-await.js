@@ -20,6 +20,7 @@ function wrapSingle(el) {
 
     el.argument = wrap(el.argument);
     el.init = wrap(el.init);
+    el.consequent = wrap(el.consequent);
     el.arguments = wrap(el.arguments);
     el.declarations = wrap(el.declarations);
 
