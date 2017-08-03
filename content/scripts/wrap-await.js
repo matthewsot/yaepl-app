@@ -16,11 +16,12 @@ let esprima = require("esprima");
 let escodegen = require("escodegen");
 
 function wrapSingle(el) {
-    if (el === undefined) return undefined;
+    if (el === undefined || el === null) return undefined;
 
     el.argument = wrap(el.argument);
     el.init = wrap(el.init);
     el.consequent = wrap(el.consequent);
+    el.alternate = wrap(el.alternate);
     el.arguments = wrap(el.arguments);
     el.declarations = wrap(el.declarations);
 
@@ -39,7 +40,7 @@ function wrapSingle(el) {
     return el;
 }
 function wrapList(list) {
-    if (list === undefined) return undefined;
+    if (list === undefined || list === null) return undefined;
 
     if (list.body !== undefined) {
         list.body = wrap(list.body);
